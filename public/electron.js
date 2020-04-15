@@ -1,22 +1,41 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
+const { dialog } = require("electron");
 const isDev = require("electron-is-dev");
+// app.userAgentFallback = app.userAgentFallback.replace(
+//   "Electron/" + process.versions.electron,
+//   ""
+// );
+app.userAgentFallback =
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) old-airport-include/1.0.0 Chrome Electron/7.1.7 Safari/537.36";
+
 function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 700,
     webPreferences: {
       nodeIntegration: true,
+      webSecurity: false,
     },
   });
 
   // and load the index.html of the app.
+
   win.loadURL(
     isDev
       ? "http://localhost:3000"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
+
+  // const ses = win.webContents.session;
+  // ses.setUserAgent("Chrome");
+
+  // const options = {
+  //   buttons: ["Yes", "No", "Cancel"],
+  //   message: "hello world" + ses.getUserAgent(),
+  // };
+  // dialog.showMessageBox(options);
 }
 
 // This method will be called when Electron has finished

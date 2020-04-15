@@ -2,22 +2,33 @@
   "name": "byhtkpro",
   "version": "0.1.0",
   "main": "public/electron.js",
+  "description": "spidy",
+  "author": "piyush rai",
+  "build": {
+    "appId": "byhtkpro.app"
+  },
+  "homepage": "./",
   "dependencies": {
+    "@material-ui/core": "^4.9.10",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "cross-env": "^7.0.2",
     "electron-is-dev": "^1.2.0",
+    "firebase": "^7.14.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-google-login": "^5.1.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "react-uuid": "^1.0.2"
   },
   "scripts": {
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "react-test": "react-scripts test",
     "react-eject": "react-scripts eject",
-    "electorn-build": "electron-builder",
+    "electron-build": "electron-builder",
     "build": "npm run react-build && npm run electron-build",
     "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on  http://localhost:3000 && electron .\""
   },
