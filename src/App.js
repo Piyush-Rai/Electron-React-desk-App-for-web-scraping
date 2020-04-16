@@ -7,12 +7,10 @@ import Home from "./Components/Home";
 class App extends Component {
   render() {
     return (
-      <div>
-        <Router>
-          <Route exact path="/" component={Glogin} />
-          <Route exact path="/home" component={Home} />
-        </Router>
-      </div>
+      <Router>
+        <Route exact path="/" component={Glogin} />
+        <Route exact path="/home" component={Home} />
+      </Router>
     );
   }
 }

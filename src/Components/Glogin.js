@@ -4,6 +4,7 @@ import title from "../images/title.png";
 import google from "../images/google.png";
 import GoogleLogin from "react-google-login";
 import Box from "@material-ui/core/Box";
+import "./Glogin.css";
 import Container from "@material-ui/core/Container";
 class Glogin extends Component {
   state = {
@@ -20,8 +21,8 @@ class Glogin extends Component {
     console.log(this.props);
 
     return (
-      <div style={{ marginTop: 62 }}>
-        <Box display="flex" p={1} justifyContent="center" alignItems="center">
+      <div className="Glogin" style={{ margin: 0 }}>
+        <Box display="flex" pt={10} justifyContent="center" alignItems="center">
           <Box p={1}>
             {" "}
             <img src={spider} alt="spider" width="100px" height="97px" />
@@ -76,6 +77,7 @@ class Glogin extends Component {
                   backgroundPosition: "center",
                   width: 300,
                   height: 50,
+                  cursor: "pointer",
                 }}
               ></button>
             )}

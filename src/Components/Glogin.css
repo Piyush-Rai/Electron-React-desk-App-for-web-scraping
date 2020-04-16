@@ -1,0 +1,11 @@
+body,
+html,
+#root {
+  height: 100%;
+}
+
+.Glogin {
+  height: 100%;
+
+  background-color: rgba(74, 97, 242, 1);
+}
