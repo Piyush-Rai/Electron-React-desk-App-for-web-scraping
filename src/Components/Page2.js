@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import Logout from "./Logout";
 import "./home.css";
 
-import boy from "../images/boy.png";
+import boy2 from "../images/boy2.png";
 
 import spider2 from "../images/spider2.png";
 import Box from "@material-ui/core/Box";
 import { Button } from "@material-ui/core";
-class Home extends Component {
+class Page2 extends Component {
   nextPage = () => {
-    this.props.history.push("/page1");
+    console.log("agla page");
+    this.props.history.push("/page3");
   };
 
   render() {
@@ -35,7 +36,6 @@ class Home extends Component {
               HOW IT WORKS
             </span>
             <Box
-              dispaly="flex"
               style={{
                 margin: "15px 0px 2px 30px",
                 width: "100%",
@@ -46,19 +46,17 @@ class Home extends Component {
             >
               <Box
                 style={{
-                  borderLeft: "6px solid rgba(74, 97, 242, 1)",
                   height: "40px",
                   width: "100%",
-                  padding: "2px 32px 32px 32px",
+                  padding: "2px 32px 15px 32px",
                   position: "relative",
                   left: "-4px",
                 }}
               >
                 <p
                   style={{
-                    fontFamily: "Avenir",
                     fontSize: "20px",
-                    fontWeight: 500,
+                    fontWeight: 600,
                     color: "rgba(49, 49, 49, 1)",
                     lineHeight: "40px",
                     marginTop: "0px",
@@ -69,10 +67,58 @@ class Home extends Component {
               </Box>
 
               <Box
+                style={{
+                  height: "40px",
+                  width: "74%",
+                  padding: "2px 32px 32px 32px",
+                  position: "relative",
+                  left: "-4px",
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: 600,
+                    color: "rgba(49, 49, 49, 1)",
+                    lineHeight: "35px",
+                    marginTop: "0px",
+                  }}
+                >
+                  2. Spidy uses your unused data from your phone to crawl some
+                  info on web
+                </p>
+              </Box>
+
+              <Box
+                style={{
+                  borderLeft: "6px solid rgba(74, 97, 242, 1)",
+                  height: "40px",
+                  width: "75%",
+                  padding: "2px 32px 32px 28px",
+                  position: "relative",
+                  left: "-4px",
+                  marginTop: "20px",
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: 600,
+                    color: "rgba(49, 49, 49, 1)",
+                    lineHeight: "35px",
+                    marginTop: "0px",
+                  }}
+                >
+                  3. You can set limits for data & duration. Get rewarded for
+                  each completed session.
+                </p>
+              </Box>
+
+              <Box
                 justifyContent="flex-end"
                 display="flex"
-                p={2}
-                style={{ width: "60%" }}
+                p={3}
+                style={{ width: "75%" }}
               >
                 <Box>
                   <Button
@@ -92,8 +138,15 @@ class Home extends Component {
             </Box>
           </Box>
 
-          <Box p={1} style={{ width: "50%" }}>
-            <img src={boy} alt="boylogo" height="504px" width="400px" />
+          <Box
+            style={{
+              width: "50%",
+              marginTop: "-12px",
+              padding: "10px 10px 10px 55px",
+              marginLeft: "72px",
+            }}
+          >
+            <img src={boy2} alt="boylogo" height="510px" width="300px" />
           </Box>
         </Box>
         {/* <Logout /> */}
@@ -102,4 +155,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Page2;
