@@ -6,6 +6,7 @@ import Home from "./Components/Home";
 import Page1 from "./Components/Page1";
 import Page2 from "./Components/Page2";
 import Page3 from "./Components/Page3";
+import MyAccount from "./Components/MyAccount";
 class App extends Component {
   render() {
     return (
@@ -15,6 +16,7 @@ class App extends Component {
         <Route exact path="/page1" component={Page1} />
         <Route exact path="/page2" component={Page2} />
         <Route exact path="/page3" component={Page3} />
+        <Route exact path="/myaccount" component={MyAccount} />
       </Router>
     );
   }

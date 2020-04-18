@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Logout from "./Logout";
+
 import "./home.css";
 
 import boy2 from "../images/boy2.png";

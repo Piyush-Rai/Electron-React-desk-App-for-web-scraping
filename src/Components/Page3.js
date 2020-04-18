@@ -10,7 +10,7 @@ import { Button } from "@material-ui/core";
 class Page3 extends Component {
   nextPage = () => {
     console.log("agla page");
-    //  this.props.history.push("/page3");
+    this.props.history.push("/myaccount");
   };
 
   render() {
