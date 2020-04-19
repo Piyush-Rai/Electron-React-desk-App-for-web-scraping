@@ -15,7 +15,12 @@ import fill7 from "../images/fill7.png";
 export default class Sidebar extends Component {
   render() {
     return (
-      <Box style={{ width: "299px", backgroundColor: "rgba(74, 97, 242, 1)" }}>
+      <Box
+        flex="0 0 300px"
+        style={{
+          backgroundColor: "rgba(74, 97, 242, 1)",
+        }}
+      >
         <Box
           display="flex"
           justifyContent="center"
