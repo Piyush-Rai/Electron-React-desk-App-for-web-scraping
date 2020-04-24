@@ -17,3 +17,9 @@ html,
   background-position: center;
   cursor: pointer;
 }
+.MB:hover {
+  cursor: pointer;
+}
+.GB:hover {
+  cursor: pointer;
+}
