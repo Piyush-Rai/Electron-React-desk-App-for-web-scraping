@@ -2,37 +2,117 @@ import React, { Component } from "react";
 import spider from "../images/spider_sm.png";
 import title from "../images/title.png";
 import google from "../images/google.png";
-import GoogleLogin from "react-google-login";
+
 import axios from "axios";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import "./Glogin.css";
 import Container from "@material-ui/core/Container";
+const remote = window.require("electron").remote;
+
 class Glogin extends Component {
   state = {
     isSignedIn: false,
   };
 
-  componentDidMount() {
-    axios.get("https://advcrawler.buyhatke.com/spidy/loggedIn/").then((res) => {
+  componentWillMount() {
+    /* axios.get("https://advcrawler.buyhatke.com/spidy/loggedIn/").then((res) => {
       console.log(res);
-    });
+    });*/
+
+    remote.session.defaultSession.cookies
+      .get({ name: "connect.sid" })
+      .then((cookies) => {
+        console.log("cookie ===");
+        console.log(cookies);
+        if (cookies.length) this.props.history.push("/home");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
+  handleDelete = () => {
+    console.log("bahar");
+
+    remote.session.defaultSession.clearStorageData([], (data) => {
+      console.log(data);
+    });
+  };
+
   handleGoogleLogin = () => {
-    axios.post("https://advcrawler.buyhatke.com/spidy/glogin/", {
+    axios
+      .post("https://advcrawler.buyhatke.com/spidy/glogin/", {
         source: "web",
         withCredentials: true,
-        headers: { crossDomain: true, "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data.url);
         console.log("=================================");
-        axios
-          .get("https://advcrawler.buyhatke.com/spidy/loggedIn/")
-          .then((res) => {
-            console.log(res);
-          });
+
+        // remote.getCurrentWindow().loadURL(res.data.url);
+        // if (document.cookie)
+        //   remote.getCurrentWindow().loadURL("http://localhost:3000");
+
+        const BrowserWindow = remote.BrowserWindow;
+        const win = new BrowserWindow({
+          height: 600,
+          width: 900,
+          frame: false,
+          show: false,
+          parent: remote.getCurrentWindow(),
+          webPreferences: {
+            nodeIntegration: true,
+          },
+        });
+        // console.log(win.webContents);
+        win.loadURL(res.data.url);
+
+        win.once("ready-to-show", () => {
+          win.show();
+        });
+
+        win.webContents.on("did-frame-navigate", (event, newUrl) => {
+          console.log("hello world     " + newUrl);
+
+          remote.session.defaultSession.cookies
+            .get({ name: "connect.sid" })
+            .then((cookies) => {
+              console.log(cookies);
+              if (cookies.length) {
+                win.hide();
+                this.props.history.push("/home");
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+
+        // remote.session.defaultSession.cookies
+        //   .get({ name: "connect.sid" })
+        //   .then((cookies) => {
+        //     console.log(cookies);
+
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   });
+
+        // axios.get(res.data.url, { withCredentials: true }).then((res) => {
+        //   console.log(res);
+
+        //   console.log("=====================+++++");
+
+        //   axios
+        //     .get("https://advcrawler.buyhatke.com/spidy/loggedIn/", {
+        //       withCredentials: true,
+        //     })
+        //     .then((res) => {
+        //       console.log(res);
+        //     });
+        // });
       })
       .catch((e) => {
         console.log(e);
@@ -47,8 +127,6 @@ class Glogin extends Component {
     this.props.history.push("/");
   };
   render() {
-    console.log(this.props);
-
     return (
       <div className="Glogin" style={{ margin: 0 }}>
         <Box display="flex" pt={10} justifyContent="center" alignItems="center">
@@ -94,9 +172,19 @@ class Glogin extends Component {
           justifyContent="center"
           style={{ marginTop: 80 }}
         >
-          <Button variant="contained" onClick={this.handleGoogleLogin}>
-            Google Login
-          </Button>
+          <Button
+            variant="contained"
+            style={{
+              backgroundImage: `url(${google})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              width: 300,
+              height: 50,
+              borderRadius: 0,
+            }}
+            onClick={this.handleGoogleLogin}
+          ></Button>
         </Box>
 
         <Container
@@ -106,12 +194,15 @@ class Glogin extends Component {
           <span
             style={{
               color: "rgba(255, 255, 255, 1)",
-              fontFamily: "Avenir-Medium",
-              fontSize: "20px",
+              fontFamily: "Avenir",
+              fontSize: "19px",
               fontWeight: 500,
             }}
           >
-            By clicking this you are agreeing to Spidy TOS and Privacy Policy
+            By clicking this you are agreeing to Spidy{" "}
+            <span style={{ borderBottom: "2px solid rgba(169, 169, 169, 1)" }}>
+              TOS and Privacy Policy
+            </span>
           </span>
         </Container>
       </div>

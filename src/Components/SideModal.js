@@ -268,7 +268,7 @@ export default class SideModal extends Component {
                     height: "31px",
                     backgroundColor:
                       this.state.time === "30 Min"
-                        ? "rgba(229, 229, 229, 1)"
+                        ? "white"
                         : "rgba(42, 66, 213, 1)",
                     borderRadius: "2px",
                   }}
@@ -299,7 +299,7 @@ export default class SideModal extends Component {
                     height: "31px",
                     backgroundColor:
                       this.state.time === "1 Hrs"
-                        ? "rgba(229, 229, 229, 1)"
+                        ? "white"
                         : "rgba(42, 66, 213, 1)",
                     borderRadius: "2px",
                   }}
@@ -328,7 +328,7 @@ export default class SideModal extends Component {
                     height: "31px",
                     backgroundColor:
                       this.state.time === "2 Hrs"
-                        ? "rgba(229, 229, 229, 1)"
+                        ? "white"
                         : "rgba(42, 66, 213, 1)",
                     borderRadius: "2px",
                   }}
@@ -359,7 +359,7 @@ export default class SideModal extends Component {
                     height: "31px",
                     backgroundColor:
                       this.state.time === "4 Hrs"
-                        ? "rgba(229, 229, 229, 1)"
+                        ? "white"
                         : "rgba(42, 66, 213, 1)",
                     borderRadius: "2px",
                   }}
@@ -388,7 +388,7 @@ export default class SideModal extends Component {
                     height: "31px",
                     backgroundColor:
                       this.state.time === "6 Hrs"
-                        ? "rgba(229, 229, 229, 1)"
+                        ? "white"
                         : "rgba(42, 66, 213, 1)",
                     borderRadius: "2px",
                   }}

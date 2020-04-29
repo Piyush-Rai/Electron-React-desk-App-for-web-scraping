@@ -7,7 +7,24 @@ import boy from "../images/boy.png";
 import spider2 from "../images/spider2.png";
 import Box from "@material-ui/core/Box";
 import { Button } from "@material-ui/core";
+const remote = window.require("electron").remote;
 class Home extends Component {
+  componentDidMount() {
+    /* axios.get("https://advcrawler.buyhatke.com/spidy/loggedIn/").then((res) => {
+      console.log(res);
+    });*/
+
+    remote.session.defaultSession.cookies
+      .get({ name: "connect.sid" })
+      .then((cookies) => {
+        console.log("aa gye home mae");
+        console.log(cookies);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   nextPage = () => {
     this.props.history.push("/page1");
   };
@@ -56,23 +73,22 @@ class Home extends Component {
               >
                 <p
                   style={{
-                    fontFamily: "Avenir",
                     fontSize: "20px",
-                    fontWeight: 500,
+                    fontWeight: 600,
                     color: "rgba(49, 49, 49, 1)",
                     lineHeight: "40px",
                     marginTop: "0px",
                   }}
                 >
-                  1. Hello there! Welcome to Spidy
+                  1. Hello there! Welcome to Spidy .
                 </p>
               </Box>
 
               <Box
                 justifyContent="flex-end"
                 display="flex"
-                p={2}
-                style={{ width: "60%" }}
+                p={1}
+                style={{ width: "65%" }}
               >
                 <Box>
                   <Button

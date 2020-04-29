@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import Slider from "@material-ui/core/Slider";
@@ -48,9 +48,5 @@ class SimpleSlider extends React.Component {
     );
   }
 }
-
-SimpleSlider.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default SimpleSlider;

@@ -191,6 +191,7 @@ export default class Sidebar extends Component {
         </Box>
 
         <Box
+          onClick={this.props.logout}
           className="nav"
           display="flex"
           justifyContent="felx=start"

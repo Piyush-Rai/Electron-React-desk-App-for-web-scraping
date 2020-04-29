@@ -93,7 +93,7 @@ class Page1 extends Component {
                 justifyContent="flex-end"
                 display="flex"
                 p={4}
-                style={{ width: "64%" }}
+                style={{ width: "65%" }}
               >
                 <Box>
                   <Button

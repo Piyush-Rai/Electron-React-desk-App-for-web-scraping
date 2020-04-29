@@ -2,14 +2,87 @@ import React, { Component } from "react";
 import spider from "../images/spider_sm.png";
 import title from "../images/title.png";
 import google from "../images/google.png";
-import GoogleLogin from "react-google-login";
+
+import axios from "axios";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 import "./Glogin.css";
 import Container from "@material-ui/core/Container";
+const remote = window.require("electron").remote;
+
 class Glogin extends Component {
-  state = {
-    isSignedIn: false,
+  componentWillMount() {
+    remote.session.defaultSession.cookies
+      .get({ name: "connect.sid" })
+      .then((cookies) => {
+        console.log("cookie ===");
+        console.log(cookies);
+        if (cookies.length) this.props.history.push("/myaccount");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  handleDelete = () => {
+    console.log("bahar");
+
+    remote.session.defaultSession.clearStorageData([], (data) => {
+      console.log(data);
+    });
   };
+
+  handleGoogleLogin = () => {
+    axios
+      .post("https://advcrawler.buyhatke.com/spidy/glogin/", {
+        source: "web",
+        withCredentials: true,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      })
+      .then((res) => {
+        console.log(res.data.url);
+        console.log("=================================");
+
+        const BrowserWindow = remote.BrowserWindow;
+        const win = new BrowserWindow({
+          height: 600,
+          width: 900,
+          frame: false,
+
+          parent: remote.getCurrentWindow(),
+          webPreferences: {
+            nodeIntegration: true,
+          },
+        });
+        // console.log(win.webContents);
+        win.loadURL(res.data.url);
+
+        // win.once("ready-to-show", () => {
+        //   win.show();
+        // });
+
+        win.webContents.on("did-frame-navigate", (event, newUrl) => {
+          console.log("hello world     " + newUrl);
+
+          remote.session.defaultSession.cookies
+            .get({ name: "connect.sid" })
+            .then((cookies) => {
+              console.log(cookies);
+              if (cookies.length) {
+                win.hide();
+                this.props.history.push("/home");
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   responseGoogle = (res) => {
     console.log(res);
     this.props.history.push("/home");
@@ -18,8 +91,6 @@ class Glogin extends Component {
     this.props.history.push("/");
   };
   render() {
-    console.log(this.props);
-
     return (
       <div className="Glogin" style={{ margin: 0 }}>
         <Box display="flex" pt={10} justifyContent="center" alignItems="center">
@@ -36,14 +107,6 @@ class Glogin extends Component {
               height="79.07px"
             ></img>
           </Box>
-
-          {/* <GoogleLogin
-          clientId="592790702111-fcc24gegsbhvk9kted69dnhjpc1uijdf.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={this.responseGoogle}
-          onFailure={this.failGoogle}
-          cookiePolicy={"single_host_origin"}
-        /> */}
         </Box>
         <Container
           style={{ marginTop: "10px", textAlign: "center" }}
@@ -65,30 +128,19 @@ class Glogin extends Component {
           justifyContent="center"
           style={{ marginTop: 80 }}
         >
-          <GoogleLogin
-            clientId="592790702111-fcc24gegsbhvk9kted69dnhjpc1uijdf.apps.googleusercontent.com"
-            render={(renderProps) => (
-              <button
-                onClick={renderProps.onClick}
-                style={{
-                  backgroundImage: `url(${google})`,
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  width: 300,
-                  height: 50,
-                  cursor: "pointer",
-                }}
-              ></button>
-            )}
-            buttonText=""
-            onSuccess={this.responseGoogle}
-            onFailure={this.failGoogle}
-            cookiePolicy={"single_host_origin"}
+          <Button
+            variant="contained"
             style={{
-              background: "blue",
+              backgroundImage: `url(${google})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              width: 300,
+              height: 50,
+              borderRadius: 0,
             }}
-          />
+            onClick={this.handleGoogleLogin}
+          ></Button>
         </Box>
 
         <Container
@@ -98,12 +150,15 @@ class Glogin extends Component {
           <span
             style={{
               color: "rgba(255, 255, 255, 1)",
-              fontFamily: "Avenir-Medium",
-              fontSize: "20px",
+              fontFamily: "Avenir",
+              fontSize: "19px",
               fontWeight: 500,
             }}
           >
-            By clicking this you are agreeing to Spidy TOS and Privacy Policy
+            By clicking this you are agreeing to Spidy{" "}
+            <span style={{ borderBottom: "2px solid rgba(169, 169, 169, 1)" }}>
+              TOS and Privacy Policy
+            </span>
           </span>
         </Container>
       </div>

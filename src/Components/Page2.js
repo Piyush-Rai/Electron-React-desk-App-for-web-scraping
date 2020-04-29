@@ -146,7 +146,13 @@ class Page2 extends Component {
               marginLeft: "72px",
             }}
           >
-            <img src={boy2} alt="boylogo" height="510px" width="300px" />
+            <img
+              src={boy2}
+              alt="boylogo"
+              style={{ marginLeft: "42px" }}
+              height="510px"
+              width="300px"
+            />
           </Box>
         </Box>
         {/* <Logout /> */}
