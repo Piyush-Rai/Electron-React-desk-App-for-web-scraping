@@ -1,11 +1,14 @@
 {
-  "name": "byhtkpro",
+  "name": "spidy",
   "version": "0.1.0",
   "main": "public/electron.js",
   "description": "spidy",
   "author": "piyush rai",
   "build": {
-    "appId": "byhtkpro.app"
+    "appId": "spidy.app",
+    "win": {
+      "icon": "/build/icon.png"
+    }
   },
   "homepage": "./",
   "dependencies": {

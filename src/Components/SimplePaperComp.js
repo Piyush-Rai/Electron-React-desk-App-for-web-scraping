@@ -43,7 +43,7 @@ export default function SimplePaper(props) {
           </Box>
         </Box>
 
-        <Box pb={1.5} style={{ width: "47%" }}>
+        <Box pb={1.5} style={{ width: "45%" }}>
           <span
             style={{
               marginRight: "8px",
@@ -75,8 +75,12 @@ export default function SimplePaper(props) {
           </span>
         </Box>
 
-        <Box>
-          <Box display="flex" style={{ padding: "1px 2px 1px 4px" }}>
+        <Box mt={1} style={{ width: "18%" }}>
+          <Box
+            display="flex"
+            style={{ padding: "1px 2px 1px 4px" }}
+            justifyContent="flex-end"
+          >
             <Box style={{ paddingRight: "5px", paddingTop: "3px" }}>
               <img src={coinSpidy} alt="coinSpidy" width="14px" height="14px" />
             </Box>
@@ -86,7 +90,7 @@ export default function SimplePaper(props) {
               </span>
             </Box>
           </Box>
-          <Box display="flex" mt={2} justifyContent="flex-end">
+          <Box display="flex" mt={2.8} justifyContent="flex-end">
             <Box>
               <span
                 style={{

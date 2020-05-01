@@ -11,7 +11,7 @@ import fill4 from "../images/fill4.png";
 import fill5 from "../images/fill5.png";
 import fill6 from "../images/fill6.png";
 import fill7 from "../images/fill7.png";
-
+import nav from "../images/nav.png";
 export default class Sidebar extends Component {
   render() {
     return (
@@ -34,7 +34,14 @@ export default class Sidebar extends Component {
           display="flex"
           justifyContent="felx=start"
           alignItems="center"
-          style={{ height: "60px", paddingLeft: "19px" }}
+          style={{
+            height: "60px",
+            paddingLeft: "19px",
+            backgroundImage: `url(${nav})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
         >
           <Box style={{ padding: "10px 8px 8px 8px" }}>
             {" "}

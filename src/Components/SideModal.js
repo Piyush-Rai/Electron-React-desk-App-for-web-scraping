@@ -102,7 +102,7 @@ export default class SideModal extends Component {
                   width: "79px",
                   height: "84px",
                   position: "absolute",
-                  right: -39,
+                  right: -41,
                   bottom: "43%",
                   zIndex: 1,
                   backgroundImage: `url(${hexagon})`,
@@ -117,20 +117,22 @@ export default class SideModal extends Component {
               <Box
                 style={{
                   position: "absolute",
-                  right: 10,
-                  bottom: "47.82%",
+                  right: 9,
+                  bottom: "47.52%",
                   zIndex: 2,
                 }}
               >
-                <img src={caret} alt="hexagonCaret" width="8px" height="16px" />
+                <img src={caret} alt="hexagonCaret" width="9px" height="20px" />
               </Box>
             </Box>
 
             <Box
-              flex="0 0 400px"
+              flexGrow={0}
+              flexShrink={0}
               style={{
                 backgroundColor: "rgba(74, 97, 242, 1)",
                 padding: "25px 10px 10px 10px",
+                width: "400px",
               }}
             >
               <Box
