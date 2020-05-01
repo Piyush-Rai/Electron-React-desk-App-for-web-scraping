@@ -30,14 +30,17 @@ app.userAgentFallback =
 //     });
 //   });
 // }
-const GloginWin = null;
+let win;
 function createWindow() {
   // Create the browser window.
 
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 1200,
     height: 700,
-
+    minHeight: 700,
+    minWidth: 1200,
+    center: true,
+    show: false,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
@@ -51,6 +54,14 @@ function createWindow() {
       ? "http://localhost:3000"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
+
+  win.once("ready-to-show", () => {
+    win.show();
+  });
+
+  win.on("closed", () => {
+    win = null;
+  });
 
   // deleteAllCookies();
 

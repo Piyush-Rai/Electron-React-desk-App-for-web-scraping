@@ -180,7 +180,9 @@ export default class SideModal extends Component {
                         padding: "4px 2px 4px 0px",
                       }}
                     >
-                      {this.state.sliderValue}
+                      {this.state.isMB
+                        ? this.state.sliderValue
+                        : this.state.sliderValue / 100}
                     </span>
                   </Box>
                   <Box
@@ -439,7 +441,6 @@ export default class SideModal extends Component {
               >
                 <Box mr={3}>
                   <Button
-                    size="large"
                     disableElevation={false}
                     style={{
                       backgroundColor: "rgba(74, 97, 242, 1)",

@@ -25,7 +25,7 @@ export default class Sidebar extends Component {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          style={{ height: "70px", backgroundColor: "rgba(6, 24, 139, 1)" }}
+          style={{ height: "81px", backgroundColor: "rgba(6, 24, 139, 1)" }}
         >
           <img src={spider3} alt="logo" width="108px" height="30px" />
         </Box>

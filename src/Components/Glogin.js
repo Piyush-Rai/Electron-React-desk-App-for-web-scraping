@@ -11,14 +11,34 @@ import Container from "@material-ui/core/Container";
 const remote = window.require("electron").remote;
 
 class Glogin extends Component {
-  componentWillMount() {
+  componentDidMount() {
     remote.session.defaultSession.cookies
       .get({ name: "connect.sid" })
       .then((cookies) => {
         console.log("cookie ===");
         console.log(cookies);
-        if (cookies.length) this.props.history.push("/myaccount");
+        return cookies;
       })
+      .then((cookies) => {
+        if (cookies.length) {
+          const axiosConfig = {
+            headers: {
+              Cookie: `connect.sid=${cookies[0].value}`,
+            },
+            withCredentials: true,
+          };
+
+          axios
+            .get("https://advcrawler.buyhatke.com/spidy/loggedIn/", axiosConfig)
+            .then((res) => {
+              console.log(res);
+              if (res.data.logged) {
+                this.props.history.push("/myaccount");
+              }
+            });
+        }
+      })
+
       .catch((error) => {
         console.log(error);
       });
@@ -45,16 +65,12 @@ class Glogin extends Component {
 
         const BrowserWindow = remote.BrowserWindow;
         const win = new BrowserWindow({
-          height: 600,
-          width: 900,
-          frame: false,
-
           parent: remote.getCurrentWindow(),
           webPreferences: {
             nodeIntegration: true,
           },
         });
-        // console.log(win.webContents);
+        console.log(win.webContents);
         win.loadURL(res.data.url);
 
         // win.once("ready-to-show", () => {
@@ -69,6 +85,25 @@ class Glogin extends Component {
             .then((cookies) => {
               console.log(cookies);
               if (cookies.length) {
+                const scheme = cookies[0].secure ? "https" : "http";
+                const url = scheme + "://" + cookies[0].domain;
+                const newCookie = {
+                  url: url,
+                  name: cookies[0].name,
+                  value: cookies[0].value,
+                  domain: cookies[0].domain,
+                  path: cookies[0].path,
+                  secure: cookies[0].secure,
+                  httpOnly: cookies[0].httpOnly,
+                  expirationDate: cookies[0].expirationDate,
+                };
+                remote.session.defaultSession.cookies.set(
+                  newCookie,
+                  (error) => {
+                    if (error) console.error(error);
+                  }
+                );
+
                 win.hide();
                 this.props.history.push("/home");
               }
